@@ -1,35 +1,50 @@
-function getRandomRange(minValue, maxValue) {
-  if (minValue >= 0 && maxValue >= 0 && minValue !== maxValue) {
-    if (minValue > maxValue) {
-      const swap = minValue ;
-      minValue = maxValue;
-      maxValue = swap;
+const isPositive = (number) => number >= 0;
+
+const getRandomRange = (minValue, maxValue) => {
+  let result = Math.round(Math.random() * (maxValue - minValue) + minValue);
+
+  if (result < minValue && result++ > maxValue) {
+    return `Диапозон от ${minValue} до ${maxValue} не содержит целых чисел`;
+  } else if (result < minValue) {
+    return result++;
+  } else if (result > maxValue) {
+    return result--;
+  }
+  return result;
+};
+
+const getIntegerRange = (firstValue, secondValue) => {
+  if (isPositive(firstValue) && isPositive(secondValue)) {
+    switch (firstValue === secondValue) {
+      case true:
+        if (firstValue === Math.round(firstValue)) {
+          return firstValue;
+        }
+        return `Диапозон от ${firstValue} до ${secondValue} не содержит целых чисел`;
+      default:
+        if (firstValue > secondValue) {
+          const swap = firstValue ;
+          firstValue = secondValue;
+          secondValue = swap;
+        }
+        return getRandomRange(firstValue, secondValue);
     }
-    const result = Math.round(Math.random() * (maxValue - minValue) + minValue);
-    if (result < minValue && result + 1 > maxValue) {
-      return `Диапозон от ${minValue} до ${maxValue} не содержит целых чисел`;
-    } else if (result < minValue) {
-      return result + 1;
-    } else if (result > maxValue) {
-      return result - 1;
-    }
-    return result;
   }
   return NaN;
-}
+};
 
-getRandomRange(1, 2);
+getIntegerRange(1, 2);
 
 
-function getFloatRandomRange(minValue, maxValue, valueFloatPoint) {
-  if (minValue >= 0 && maxValue >= 0 && valueFloatPoint >= 0 && minValue !== maxValue) {
-    if (minValue > maxValue) {
-      const swap = minValue ;
-      minValue = maxValue;
-      maxValue = swap;
+function getFloatRandomRange(firstValue, secondValue, floatPointValue) {
+  if (isPositive(firstValue) && isPositive(secondValue) && isPositive(floatPointValue) && firstValue !== secondValue) {
+    if (firstValue > secondValue) {
+      const swap = firstValue ;
+      firstValue = secondValue;
+      secondValue = swap;
     }
-    const result = Math.random() * (maxValue - minValue) + minValue;
-    return result.toFixed(valueFloatPoint);
+    const result = Math.random() * (secondValue - firstValue) + firstValue;
+    return result.toFixed(floatPointValue);
   }
   return NaN;
 }
