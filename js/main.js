@@ -76,10 +76,7 @@ const PHOTOS = [
 
 const isPositive = (number) => number >= 0;
 
-const getRandomNumberInRange = ((lower, upper) => {
-  const result = Math.round(Math.random() * (upper - lower) + lower);
-  return Math.floor(result);
-});
+const getRandomNumberInRange = (lower, upper) => Math.round(Math.random() * (upper - lower) + lower);
 
 /**
  *
@@ -132,9 +129,9 @@ function getRandomPositiveFloat(firstValue, secondValue, floatPointValue = 1) {
   return NaN;
 }
 
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
-
 const getRandomArrayLength = (elements) => getRandomPositiveInteger(0, elements.length - 1);
+
+const getRandomArrayElement = (elements) => elements[getRandomArrayLength(elements)];
 
 const generateDataPng = (start, end) => {
   const result = [];
