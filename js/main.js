@@ -20,6 +20,23 @@ const LOCATION_FLOAT_POINT = 5;
 
 const SIMILAR_AD_COUNT = 10;
 
+const COUNTRIES = [
+  'Норвегия',
+  'Франция',
+  'Италия',
+  'Россия',
+  'Англия',
+  'Испания',
+  'Португалия',
+  'Германия',
+];
+
+const DESCRIPTIONS = [
+  'Рядом с моим жильем находится природа, где можно прогуляться по лесу. Вам понравятся оригинальность и частная скандинавская ванна. Жилье идеально подходит для пар.',
+  'На снегоступах, на лыжах, прогулки зимой, весной, летом и осенью. Этот район предлагает разнообразную природу, которую вы редко бывали в любое время года.',
+  'Найти чистый отдых со всей семьей в этом эксклюзивном месте и большой террасой с видом на юг!'
+]
+
 const TYPES = [
   'palace',
   'flat',
@@ -170,22 +187,24 @@ const createAd = () => {
   const lat = 0;
   const lng = 1;
 
+  const typeAd = getRandomArrayElement(TYPES);
+
   return {
     author: {
       avatar: createAddressAvatar(countersUserPng),
     },
 
     offer: {
-      title: '',
+      title: `${getRandomArrayElement(COUNTRIES)}, ${typeAd}`,
       Address: Address.join(', '),
       price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
-      type: getRandomArrayElement(TYPES),
+      type: typeAd,
       rooms: getRandomPositiveInteger(MIN_ROOM, MAX_ROOM),
       guests: getRandomPositiveInteger(MIN_GUEST, MAX_GUEST),
       checkin: getRandomArrayElement(CHECK_INS),
       checkout: getRandomArrayElement(CHECK_OUTS),
       features: getRandomNoReplyDataArray(FEATURES),
-      description: '',
+      description: getRandomArrayElement(DESCRIPTIONS),
       photos: getRandomDataArray(PHOTOS)
     },
 
