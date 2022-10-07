@@ -9,6 +9,7 @@ const MAX_PRICE = 500000;
 
 const FROM_DATA_PNG = 1;
 const TO_DATA_PNG = 10;
+const CHECK_SYMBOL_ZERO = 10;
 
 const MIN_LAT = 35.65000;
 const MAX_LAT = 35.70000;
@@ -138,7 +139,7 @@ const getRandomArrayLength = (elements) => getRandomPositiveInteger(0, elements.
 const generateDataPng = (start, end) => {
   const result = [];
   for (start; start <= end; start++) {
-    if (start < 10) {
+    if (start < CHECK_SYMBOL_ZERO) {
       result.push(`0${start}`);
     } else {
       result.push(`${start}`);
@@ -183,7 +184,7 @@ function getLocationAddress() {
 
 const createAd = () => {
 
-  const Address = getLocationAddress();
+  const address = getLocationAddress();
   const lat = 0;
   const lng = 1;
 
@@ -196,7 +197,7 @@ const createAd = () => {
 
     offer: {
       title: `${getRandomArrayElement(COUNTRIES)}, ${typeAd}`,
-      Address: Address.join(', '),
+      address: address.join(', '),
       price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
       type: typeAd,
       rooms: getRandomPositiveInteger(MIN_ROOM, MAX_ROOM),
@@ -209,8 +210,8 @@ const createAd = () => {
     },
 
     location: {
-      lat: Address[lat],
-      lng: Address[lng]
+      lat: address[lat],
+      lng: address[lng]
     },
   };
 };
