@@ -7,9 +7,7 @@ const MAX_GUEST = 10;
 const MIN_PRICE = 10000;
 const MAX_PRICE = 500000;
 
-const FROM_DATA_PNG = 1;
-const TO_DATA_PNG = 10;
-const CHECK_SYMBOL_ZERO = 10;
+const ITEMS_DATA_PNG = 10;
 
 const MIN_LAT = 35.65000;
 const MAX_LAT = 35.70000;
@@ -21,15 +19,15 @@ const LOCATION_FLOAT_POINT = 5;
 
 const SIMILAR_AD_COUNT = 10;
 
-const COUNTRIES = [
-  'Норвегия',
-  'Франция',
-  'Италия',
-  'Россия',
-  'Англия',
-  'Испания',
-  'Португалия',
-  'Германия',
+const REGIONS = [
+  'Хоккайдо',
+  'Тохоку',
+  'Канто',
+  'Тюбу',
+  'Хокурику',
+  'Синъэцу',
+  'Токай',
+  'Тюгоку'
 ];
 
 const DESCRIPTIONS = [
@@ -129,55 +127,52 @@ function getRandomPositiveFloat(firstValue, secondValue, floatPointValue = 1) {
   return NaN;
 }
 
-const getRandomArrayLength = (elements) => getRandomPositiveInteger(0, elements.length - 1);
+const getRandomArrayIndex = (elements) => getRandomPositiveInteger(0, elements.length - 1);
 
-const getRandomArrayElement = (elements) => elements[getRandomArrayLength(elements)];
+const getRandomArrayElement = (elements) => elements[getRandomArrayIndex(elements)];
 
-const generateDataPng = (start, end) => {
-  const result = [];
-  for (start; start <= end; start++) {
-    if (start < CHECK_SYMBOL_ZERO) {
-      result.push(`0${start}`);
+function generateDataPng(numberOfItem) {
+  const countersUserPng = Array.from({length:numberOfItem}, (v, k) => {
+    if (String(++k).length < String(numberOfItem).length ) {
+      return `0${k}`;
     } else {
-      result.push(`${start}`);
+      return `${k}`;
     }
-  }
-  return result;
-};
+  });
+  return () => {
+    switch (countersUserPng.length) {
+      case 0:
+        return `${countersUserPng} пустой массив`;
+      default:
+        return `img/avatars/user${countersUserPng.shift()}.png`;
+    }
+  };
+}
 
-const countersUserPng = [...generateDataPng(FROM_DATA_PNG, TO_DATA_PNG)];
-
-const createAddressAvatar = (arrayData) => {
-  switch (arrayData.length) {
-    case 0:
-      return `${arrayData} пустой массив`;
-    default:
-      return `img/avatars/user${arrayData.shift()}.png`;
-  }
-};
+const createAddressAvatar = generateDataPng(ITEMS_DATA_PNG);
 
 const getRandomNoReplyDataArray = (array) => {
   const shuffleReplicates = array.slice().sort(() => Math.random() - 0.5);
   const result = [];
-  for (let i = getRandomPositiveInteger(0, array.length - 1); i < array.length; i++) {
+  for (let i = getRandomArrayIndex(array); i < array.length; i++) {
     result.push(shuffleReplicates.shift());
   }
-  return result;
+  return result.sort();
 };
 
-const getRandomDataArray = (array, retry = getRandomArrayLength(array)) => {
+const getRandomDataArray = (array, retry = getRandomArrayIndex(array)) => {
   const result = [];
-  for (let i = 0; i < retry; i++) {
+  while (result.length <= retry) {
     result.push(getRandomArrayElement(array));
   }
   return result;
 };
 
-function getLocationAddress() {
+const getLocationAddress = () => {
   const lat = getRandomPositiveFloat(MIN_LAT, MAX_LAT, LOCATION_FLOAT_POINT);
   const lng = getRandomPositiveFloat(MIN_LNG, MAX_LNG, LOCATION_FLOAT_POINT);
   return [lat, lng];
-}
+};
 
 const createAd = () => {
 
@@ -189,11 +184,11 @@ const createAd = () => {
 
   return {
     author: {
-      avatar: createAddressAvatar(countersUserPng),
+      avatar: createAddressAvatar(),
     },
 
     offer: {
-      title: `${getRandomArrayElement(COUNTRIES)}, ${typeAd}`,
+      title: `${getRandomArrayElement(REGIONS)}, ${typeAd}`,
       address: address.join(', '),
       price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
       type: typeAd,
