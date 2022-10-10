@@ -1,6 +1,3 @@
-import './random.js';
-import { similarAds } from './data.js';
+import './generate-template.js';
 
-const SIMILAR_AD_COUNT = 10;
 
-similarAds(SIMILAR_AD_COUNT);
