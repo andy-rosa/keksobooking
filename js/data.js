@@ -72,21 +72,8 @@ const PHOTOS = [
 ];
 
 function generateDataPng(numberOfItem) {
-  const countersUserPng = Array.from({length:numberOfItem}, (v, k) => {
-    if (String(++k).length < String(numberOfItem).length ) {
-      return `0${k}`;
-    } else {
-      return `${k}`;
-    }
-  });
-  return () => {
-    switch (countersUserPng.length) {
-      case 0:
-        return `${countersUserPng} пустой массив`;
-      default:
-        return `img/avatars/user${countersUserPng.shift()}.png`;
-    }
-  };
+  const countersUserPng = Array.from({length:numberOfItem}, (v, k) => (String(++k).length < String(numberOfItem).length) ? `0${k}` : `${k}`);
+  return () => (countersUserPng.length > 0) ? `img/avatars/user${countersUserPng.shift()}.png` : `${countersUserPng} пустой массив`;
 }
 
 const createAddressAvatar = generateDataPng(ITEMS_DATA_PNG);
