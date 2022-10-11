@@ -1,3 +1,3 @@
-import './generate-template.js';
+import './fill-template.js';
 
 
