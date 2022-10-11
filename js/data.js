@@ -71,10 +71,10 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-function generateDataPng(numberOfItem) {
-  const countersUserPng = Array.from({length:numberOfItem}, (v, k) => (String(++k).length < String(numberOfItem).length) ? `0${k}` : `${k}`);
+const generateDataPng = (lengthValue) => {
+  const countersUserPng = Array.from({ length: lengthValue }, (_, k) => String(++k).padStart(String(lengthValue).length, '0'));
   return () => (countersUserPng.length > 0) ? `img/avatars/user${countersUserPng.shift()}.png` : `${countersUserPng} пустой массив`;
-}
+};
 
 const createAddressAvatar = generateDataPng(ITEMS_DATA_PNG);
 
@@ -137,4 +137,4 @@ const createAd = () => {
 
 const similarAds = (lengthValue) => Array.from({ length: lengthValue }, createAd);
 
-export {similarAds};
+export { similarAds };
