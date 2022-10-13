@@ -19,6 +19,9 @@ const MAX_LNG = 139.80000;
 
 const LOCATION_FLOAT_POINT = 5;
 
+const MIN_PHOTO = 0;
+const MAX_PHOTO = 6;
+
 const REGIONS = [
   'Хоккайдо',
   'Тохоку',
@@ -80,20 +83,13 @@ const createAddressAvatar = generateDataPng(ITEMS_DATA_PNG);
 
 const getRandomNoReplyDataArray = (array) => {
   const shuffleReplicates = array.slice().sort(() => Math.random() - 0.5);
-  const result = [];
-  for (let i = getRandomArrayIndex(array); i < array.length; i++) {
-    result.push(shuffleReplicates.shift());
-  }
+  const result = Array.from({ length: getRandomArrayIndex(array) }, () => shuffleReplicates.shift());
+
   return result.sort();
 };
 
-const getRandomDataArray = (array, retry = getRandomArrayIndex(array)) => {
-  const result = [];
-  while (result.length <= retry) {
-    result.push(getRandomArrayElement(array));
-  }
-  return result;
-};
+const getRandomDataArray = (array, retry = getRandomPositiveInteger(MIN_PHOTO, MAX_PHOTO)) => Array.from({ length: retry }, () => getRandomArrayElement(array));
+
 
 const getLocationAddress = () => {
   const lat = getRandomPositiveFloat(MIN_LAT, MAX_LAT, LOCATION_FLOAT_POINT);
