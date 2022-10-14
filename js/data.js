@@ -100,36 +100,35 @@ const getLocationAddress = () => {
 const createAd = () => {
 
   const address = getLocationAddress();
-  const lat = 0;
-  const lng = 1;
+  const latitude = 0;
+  const longitude = 1;
 
   const typeAd = getRandomArrayElement(TYPES);
 
-  return {
-    author: {
-      avatar: createAddressAvatar(),
-    },
-
-    offer: {
-      title: `${getRandomArrayElement(REGIONS)}, ${typeAd}`,
-      address: address.join(', '),
-      price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
-      type: typeAd,
-      rooms: getRandomPositiveInteger(MIN_ROOM, MAX_ROOM),
-      guests: getRandomPositiveInteger(MIN_GUEST, MAX_GUEST),
-      checkin: getRandomArrayElement(CHECK_INS),
-      checkout: getRandomArrayElement(CHECK_OUTS),
-      features: getRandomNoReplyDataArray(FEATURES),
-      description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getRandomDataArray(PHOTOS)
-    },
-
-    location: {
-      lat: address[lat],
-      lng: address[lng]
-    },
+  const authorAd = {
+    avatar: createAddressAvatar(),
   };
+  const offerAd = {
+    title: `${getRandomArrayElement(REGIONS)}, ${typeAd}`,
+    address: address.join(', '),
+    price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
+    type: typeAd,
+    rooms: getRandomPositiveInteger(MIN_ROOM, MAX_ROOM),
+    guests: getRandomPositiveInteger(MIN_GUEST, MAX_GUEST),
+    checkin: getRandomArrayElement(CHECK_INS),
+    checkout: getRandomArrayElement(CHECK_OUTS),
+    features: getRandomNoReplyDataArray(FEATURES),
+    description: getRandomArrayElement(DESCRIPTIONS),
+    photos: getRandomDataArray(PHOTOS)
+  };
+  const locationAd = {
+    lat: address[latitude],
+    lng: address[longitude]
+  };
+
+  return { author: authorAd, offer: offerAd, location: locationAd};
 };
+
 
 const similarAds = (lengthValue) => Array.from({ length: lengthValue }, createAd);
 
