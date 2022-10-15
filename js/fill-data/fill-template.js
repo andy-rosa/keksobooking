@@ -10,6 +10,8 @@ const template = document.querySelector('#card').content;
 const cardTemplate = template.querySelector('.popup');
 
 const fillTemplate = () => {
+  const fragment = document.createDocumentFragment();
+
   similarAdsList.forEach(({ author, offer }) => {
     const adElement = cardTemplate.cloneNode(true);
     const listFeatures = adElement.querySelectorAll('.popup__feature');
@@ -63,8 +65,10 @@ const fillTemplate = () => {
     fillListData(offer.features, listFeatures, adElement, 'features', getListFeatures);
     fillListData(offer.photos, offer.photos, adElement, 'photos', getListPhoto);
 
-    mapAdList.append(adElement);
+    fragment.append(adElement);
   });
+
+  return mapAdList.append(fragment);
 };
 
 export { fillTemplate };
