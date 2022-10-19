@@ -5,7 +5,7 @@ const deactivateForm = () => {
   adForm.classList.add('ad-form--disabled');
 
   fieldsetList.forEach((fieldset) => {
-    fieldset.setAttribute('disabled', '');
+    fieldset.disabled = true;
   });
 };
 
@@ -13,7 +13,7 @@ const activateForm = () => {
   adForm.classList.remove('ad-form--disabled');
 
   fieldsetList.forEach((fieldset) => {
-    fieldset.removeAttribute('disabled');
+    fieldset.disabled = false;
   });
 };
 
