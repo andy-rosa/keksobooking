@@ -16,12 +16,16 @@ const fillTemplate = () => {
     const adElement = cardTemplate.cloneNode(true);
     const listFeatures = adElement.querySelectorAll('.popup__feature');
 
-    const offerRoomText = offer.rooms === 1 ?
+    const textForOnlyRoom = 1;
+    const textForMoreFiveRoom = 5;
+    const textForOnlyGuest = 1;
+
+    const offerRoomText = offer.rooms === textForOnlyRoom ?
       `${offer.rooms} комната` :
-      `${offer.rooms >= 5 ?
+      `${offer.rooms >= textForMoreFiveRoom ?
         `${offer.rooms} комнат` :
         `${offer.rooms} комнаты`}`;
-    const offerGuestsText = `для ${offer.guests === 1 ?
+    const offerGuestsText = `для ${offer.guests === textForOnlyGuest ?
       `${offer.guests} гостя` :
       `${offer.guests} гостей`}`;
 
