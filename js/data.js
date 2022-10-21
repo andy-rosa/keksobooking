@@ -126,7 +126,7 @@ const createAd = () => {
     lng: address[longitude]
   };
 
-  return { author: authorAd, offer: offerAd, location: locationAd};
+  return { author: authorAd, offer: offerAd, location: locationAd };
 };
 
 

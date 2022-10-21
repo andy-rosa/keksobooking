@@ -1,3 +1,4 @@
+
 const form = document.querySelector('.ad-form');
 const priceInput = form.querySelector('#price');
 const typeSelect = form.querySelector('#type');
@@ -9,11 +10,11 @@ const timeOutSelect = form.querySelector('#timeout');
 const fieldsetTime = form.querySelector('.ad-form__element--time');
 
 const typeMinPrice = {
-  'bungalowPrice': 0,
-  'flatPrice': 1000,
-  'hotelPrice': 3000,
-  'housePrice': 5000,
-  'palacePrice': 10000,
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const pristine = new Pristine(form, {
@@ -23,31 +24,31 @@ const pristine = new Pristine(form, {
   errorTextClass: 'text-help',
 });
 
-const validateRoom = (room) => room.value >= capacitySelect.value;
+const validateRoom = () => roomSelect.value >= capacitySelect.value;
 pristine.addValidator(roomSelect, validateRoom, `Нужно больше комнат ${personNumber.textContent}`);
 
+const setMinPrice = (typeHouse) => {
+  priceInput.setAttribute('min', typeHouse);
+  priceInput.setAttribute('placeholder', typeHouse);
+};
+
 const getTypePrice = () => {
-  const { bungalowPrice, flatPrice, hotelPrice, housePrice, palacePrice } = typeMinPrice;
+  const { bungalow: bungalowPrice, flat: flatPrice, hotel: hotelPrice, house: housePrice, palace: palacePrice } = typeMinPrice;
   switch (typeSelect.value) {
     case 'bungalow':
-      priceInput.setAttribute('min', bungalowPrice);
-      priceInput.setAttribute('placeholder', bungalowPrice);
+      setMinPrice(bungalowPrice);
       break;
     case 'flat':
-      priceInput.setAttribute('min', flatPrice);
-      priceInput.setAttribute('placeholder', flatPrice);
+      setMinPrice(flatPrice);
       break;
     case 'hotel':
-      priceInput.setAttribute('min', hotelPrice);
-      priceInput.setAttribute('placeholder', hotelPrice);
+      setMinPrice(hotelPrice);
       break;
     case 'house':
-      priceInput.setAttribute('min', housePrice);
-      priceInput.setAttribute('placeholder', housePrice);
+      setMinPrice(housePrice);
       break;
     case 'palace':
-      priceInput.setAttribute('min', palacePrice);
-      priceInput.setAttribute('placeholder', palacePrice);
+      setMinPrice(palacePrice);
       break;
   }
 };

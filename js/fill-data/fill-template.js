@@ -1,18 +1,17 @@
-import { similarAds } from '../data.js';
-import { SIMILAR_AD_COUNT, TYPES } from '../util.js';
+import { TYPES } from '../util.js';
 import { getPopupValueTextContent, getPopupValueDoubleKey, getPhotoSrc, fillListData } from './fill-functions.js';
 
-const similarAdsList = similarAds(SIMILAR_AD_COUNT);
 
-const mapAdList = document.querySelector('#map-canvas');
+// const mapAdList = document.querySelector('#map-canvas');
 
 const template = document.querySelector('#card').content;
 const cardTemplate = template.querySelector('.popup');
 
-const fillTemplate = () => {
-  const adListFragment = document.createDocumentFragment();
+const fillTemplate = (arrayName) => {
+  // const adListFragment = document.createDocumentFragment();
+  const result = [];
 
-  similarAdsList.forEach(({ author, offer }) => {
+  arrayName.forEach(({ author, offer }) => {
     const adElement = cardTemplate.cloneNode(true);
     const listFeatures = adElement.querySelectorAll('.popup__feature');
 
@@ -72,7 +71,7 @@ const fillTemplate = () => {
     adListFragment.append(adElement);
   });
 
-  return mapAdList.append(adListFragment);
+  return adListFragment;
 };
 
 export { fillTemplate };
