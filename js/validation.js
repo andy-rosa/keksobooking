@@ -1,10 +1,8 @@
-
 const form = document.querySelector('.ad-form');
 const priceInput = form.querySelector('#price');
 const typeSelect = form.querySelector('#type');
 const roomSelect = form.querySelector('#room_number');
 const capacitySelect = form.querySelector('#capacity');
-const personNumber = capacitySelect.querySelector('option:checked');
 const timeInSelect = form.querySelector('#timein');
 const timeOutSelect = form.querySelector('#timeout');
 const fieldsetTime = form.querySelector('.ad-form__element--time');
@@ -24,48 +22,31 @@ const pristine = new Pristine(form, {
   errorTextClass: 'text-help',
 });
 
-const validateRoom = () => roomSelect.value >= capacitySelect.value;
-pristine.addValidator(roomSelect, validateRoom, `Нужно больше комнат ${personNumber.textContent}`);
+const validateCapacity = () =>(Number(capacitySelect.value) - Number(roomSelect.value)) <= 0;
+const validateRoom = () =>( Number(roomSelect.value) - Number(capacitySelect.value)) >= 0;
+pristine.addValidator(roomSelect, validateRoom, 'Нужно больше комнат');
+pristine.addValidator(capacitySelect, validateCapacity, 'Нужно больше комнат');
 
-const setMinPrice = (typeHouse) => {
-  priceInput.setAttribute('min', typeHouse);
-  priceInput.setAttribute('placeholder', typeHouse);
+const getTypePrice = (evt) => {
+  const minPrice = typeMinPrice[evt.target.value];
+  priceInput.setAttribute('min', minPrice);
+  priceInput.setAttribute('placeholder', minPrice);
 };
 
-const getTypePrice = () => {
-  const { bungalow: bungalowPrice, flat: flatPrice, hotel: hotelPrice, house: housePrice, palace: palacePrice } = typeMinPrice;
-  switch (typeSelect.value) {
-    case 'bungalow':
-      setMinPrice(bungalowPrice);
-      break;
-    case 'flat':
-      setMinPrice(flatPrice);
-      break;
-    case 'hotel':
-      setMinPrice(hotelPrice);
-      break;
-    case 'house':
-      setMinPrice(housePrice);
-      break;
-    case 'palace':
-      setMinPrice(palacePrice);
-      break;
-  }
-};
-
-fieldsetTime.addEventListener('change', (evt) => {
+const syncTime = (evt) => {
   if (evt.target.matches('#timein')) {
     timeOutSelect.value = evt.target.value;
   } else if (evt.target.matches('#timeout')) {
     timeInSelect.value = evt.target.value;
   }
-});
+};
 
-document.addEventListener('DOMContentLoaded', getTypePrice, { 'once': true });
+const onFormSubmit = (evt) => evt.preventDefault;
+const onTypeChange = (evt) => getTypePrice(evt);
+const onTimeChange = syncTime;
 
-typeSelect.addEventListener('change', getTypePrice);
+fieldsetTime.addEventListener('change', onTimeChange);
+typeSelect.addEventListener('change', onTypeChange);
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
+form.addEventListener('submit', onFormSubmit);
 
