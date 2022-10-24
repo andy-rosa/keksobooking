@@ -11,6 +11,25 @@ const tokioCoordinates = {
   lng: 139.83947,
 };
 
+const setStartPosition = (startData) => {
+  const NAME = 0;
+  const VALUE = 1;
+
+  addressInput.value = Object.entries(startData)
+    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
+    .join(', ');
+};
+
+
+const getLocationAddress = (evt) => {
+  const NAME = 0;
+  const VALUE = 1;
+
+  addressInput.value = Object.entries(evt.target.getLatLng())
+    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
+    .join(', ');
+};
+
 const mainPinIcon = L.icon({
   iconUrl: '../../img/main-pin.svg',
   iconSize: [MAIN_WIDTH_MARKER, MAIN_HEIGHT_MARKER],
@@ -25,14 +44,7 @@ const mainPinMarker = L.marker(
   }
 );
 
-mainPinMarker.on('moveend', (evt) => {
-  const NAME = 0;
-  const VALUE = 1;
-
-  addressInput.value = Object.entries(evt.target.getLatLng())
-    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
-    .join(', ');
-});
-
+setStartPosition(tokioCoordinates);
+mainPinMarker.on('moveend', getLocationAddress);
 
 export { mainPinMarker, tokioCoordinates };

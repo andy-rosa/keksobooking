@@ -1,3 +1,5 @@
+import { isResetButton } from './util.js';
+
 const form = document.querySelector('.ad-form');
 const priceInput = form.querySelector('#price');
 const typeSelect = form.querySelector('#type');
@@ -7,6 +9,7 @@ const timeInSelect = form.querySelector('#timein');
 const timeOutSelect = form.querySelector('#timeout');
 const fieldsetTime = form.querySelector('.ad-form__element--time');
 
+
 const typeMinPrice = {
   bungalow: 0,
   flat: 1000,
@@ -15,6 +18,10 @@ const typeMinPrice = {
   palace: 10000,
 };
 
+// Сравниваем с сотней
+// Если равно сотне то разница должная быть равна тоже сотне
+//
+
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
@@ -22,10 +29,8 @@ const pristine = new Pristine(form, {
   errorTextClass: 'text-help',
 });
 
-const validateCapacity = () =>(Number(capacitySelect.value) - Number(roomSelect.value)) <= 0;
-const validateRoom = () =>( Number(roomSelect.value) - Number(capacitySelect.value)) >= 0;
-pristine.addValidator(roomSelect, validateRoom, 'Нужно больше комнат');
-pristine.addValidator(capacitySelect, validateCapacity, 'Нужно больше комнат');
+const validateRoom = () => (((Number(roomSelect.value) - Number(capacitySelect.value)) >= 0) && (Number(capacitySelect.value) !== 0)) || ((Number(roomSelect.value) - Number(capacitySelect.value)) === 100);
+pristine.addValidator(roomSelect, validateRoom, 'Не подходящее значение');
 
 const getTypePrice = (evt) => {
   const minPrice = typeMinPrice[evt.target.value];
@@ -41,7 +46,10 @@ const syncTime = (evt) => {
   }
 };
 
-const onFormSubmit = (evt) => evt.preventDefault;
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+};
 const onTypeChange = (evt) => getTypePrice(evt);
 const onTimeChange = syncTime;
 
@@ -49,4 +57,10 @@ fieldsetTime.addEventListener('change', onTimeChange);
 typeSelect.addEventListener('change', onTypeChange);
 
 form.addEventListener('submit', onFormSubmit);
+
+form.addEventListener('click', (evt) => {
+  if (isResetButton(evt)) {
+    priceInput.setAttribute('placeholder', typeMinPrice['flat']);
+  }
+});
 

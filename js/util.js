@@ -8,4 +8,6 @@ const typeTranslateRus = {
   palace: 'Дворец'
 };
 
-export { SIMILAR_AD_COUNT, typeTranslateRus };
+const isResetButton = (evt) => evt.target.matches('.ad-form__reset');
+
+export { SIMILAR_AD_COUNT, typeTranslateRus, isResetButton };

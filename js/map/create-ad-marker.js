@@ -15,14 +15,15 @@ const icon = L.icon({
 });
 
 const createMarker = (ad, layer) => {
-  const {lat, lng} = ad.location;
-  const marker = L.marker({
-    lat,
-    lng,
-  },
-  {
-    icon: icon,
-  });
+  const { lat, lng } = ad.location;
+  const marker = L.marker(
+    {
+      lat,
+      lng,
+    },
+    {
+      icon: icon,
+    });
   marker
     .addTo(layer)
     .bindPopup(fillTemplate(ad));

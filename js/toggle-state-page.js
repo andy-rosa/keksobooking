@@ -5,7 +5,7 @@ const filterElements = Array.from(filterForm.children);
 
 const deactivateForm = () => {
   adForm.classList.add('ad-form--disabled');
-  filterForm.classList.add('ad-form--disabled');
+  filterForm.classList.add('map__filters--disabled');
 
   filterElements.forEach((childElement) => {
     childElement.disabled = true;
@@ -18,7 +18,7 @@ const deactivateForm = () => {
 
 const activateForm = () => {
   adForm.classList.remove('ad-form--disabled');
-  filterForm.classList.remove('ad-form--disabled');
+  filterForm.classList.remove('map__filters--disabled');
 
   filterElements.forEach((childElement) => {
     childElement.disabled = false;

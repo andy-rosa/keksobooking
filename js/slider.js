@@ -20,7 +20,7 @@ const getPrice = (value) => typesMinPrice[value];
 
 document.addEventListener('DOMContentLoaded', () => {
   sliderElement.noUiSlider.set(priceInput.getAttribute('min'));
-}, {'once': true});
+}, { 'once': true });
 
 noUiSlider.create(sliderElement, {
   range: {
