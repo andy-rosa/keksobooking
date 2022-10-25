@@ -1,6 +1,6 @@
 const SIMILAR_AD_COUNT = 10;
 
-const TYPES = {
+const typeTranslateRus = {
   bungalow: 'Бунгало',
   flat: 'Квартира',
   hotel: 'Отель',
@@ -8,4 +8,6 @@ const TYPES = {
   palace: 'Дворец'
 };
 
-export { SIMILAR_AD_COUNT, TYPES };
+const isResetButton = (evt) => evt.target.matches('.ad-form__reset');
+
+export { SIMILAR_AD_COUNT, typeTranslateRus, isResetButton };
