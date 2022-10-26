@@ -11,22 +11,15 @@ const tokioCoordinates = {
   lng: 139.83947,
 };
 
-const setStartPosition = (startData) => {
-  const NAME = 0;
-  const VALUE = 1;
-
-  addressInput.value = Object.entries(startData)
-    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
+const setStartPosition = (startPosition) => {
+  addressInput.value = Object.values(startPosition)
+    .map((locationСoordinate) => `${Number(locationСoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
     .join(', ');
 };
 
-
 const getLocationAddress = (evt) => {
-  const NAME = 0;
-  const VALUE = 1;
-
-  addressInput.value = Object.entries(evt.target.getLatLng())
-    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
+  addressInput.value = Object.values(evt.target.getLatLng())
+    .map((locationСoordinate) => `${Number(locationСoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
     .join(', ');
 };
 
