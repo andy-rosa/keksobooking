@@ -29,6 +29,7 @@ const activateForm = () => {
   });
 };
 
+// Деактивирует страницу при загрузке модулей, ожидая ответ от карты
 deactivateForm();
 
 export { activateForm, deactivateForm };

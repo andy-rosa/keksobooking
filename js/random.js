@@ -40,7 +40,7 @@ const getRandomPositiveInteger = (firstValue, secondValue) => {
  * @param {number} floatPointValue Количество знаков после запятой по умолчанию: 1
  * @returns Возвращающает случайное число с плавающей точкой из переданного диапазона включительно
  */
-function getRandomPositiveFloat(firstValue, secondValue, floatPointValue = 1) {
+const getRandomPositiveFloat = (firstValue, secondValue, floatPointValue = 1) => {
   if (isPositive(firstValue) && isPositive(secondValue) && isPositive(floatPointValue) && firstValue !== secondValue) {
 
     const lower = Math.min(firstValue, secondValue);
@@ -51,7 +51,7 @@ function getRandomPositiveFloat(firstValue, secondValue, floatPointValue = 1) {
   }
 
   return NaN;
-}
+};
 
 const getRandomArrayIndex = (elements) => getRandomPositiveInteger(0, elements.length - 1);
 

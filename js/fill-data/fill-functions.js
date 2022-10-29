@@ -1,35 +1,75 @@
-const getPopupValueTextContent = (className, classValue, element, other = '', classValueText = classValue) => {
+const getPopupValueTextContent = (
+  className,
+  classValue,
+  element,
+  other = '',
+  classValueText = classValue
+) => {
   if (classValue) {
-    element.querySelector(`.popup__${className}`).textContent = `${classValueText} ${String(other)}`;
+    element.querySelector(`.popup__${className}`)
+      .textContent = `${classValueText} ${String(other)}`;
+
   } else {
-    element.querySelector(`.popup__${className}`).style.display = 'none';
+    element.querySelector(`.popup__${className}`)
+      .style
+      .display = 'none';
   }
 };
-const getPopupValueDoubleKey = (className, classValueFirst, classValueSecond, element, firstTextValue, secondTextValue) => {
+
+const getPopupValueDoubleKey = (
+  className,
+  classValueFirst,
+  classValueSecond,
+  element,
+  firstTextValue,
+  secondTextValue
+) => {
   if (classValueFirst && classValueSecond) {
-    element.querySelector(`.popup__${className}`).textContent = `${firstTextValue} ${secondTextValue}`;
+    element.querySelector(`.popup__${className}`)
+      .textContent = `${firstTextValue} ${secondTextValue}`;
+
   } else if (classValueFirst && !classValueSecond) {
-    element.querySelector(`.popup__${className}`).textContent = `${firstTextValue}`;
+    element.querySelector(`.popup__${className}`)
+      .textContent = `${firstTextValue}`;
+
   } else if (!classValueFirst && classValueSecond) {
-    element.querySelector(`.popup__${className}`).textContent = `${secondTextValue}`;
+    element.querySelector(`.popup__${className}`)
+      .textContent = `${secondTextValue}`;
+
   } else {
-    element.querySelector(`.popup__${className}`).style.display = 'none';
+    element.querySelector(`.popup__${className}`)
+      .style
+      .display = 'none';
   }
 };
 
 const getPhotoSrc = (classValue, element) => {
   if (classValue) {
-    element.querySelector('.popup__avatar').src = classValue;
+    element.querySelector('.popup__avatar')
+      .src = classValue;
   } else {
-    element.querySelector('.popup__avatar').style.display = 'none';
+    element.querySelector('.popup__avatar')
+      .style
+      .display = 'none';
   }
 };
 
-const fillListData = (arrayName, collectionAction, element, className, callback) => {
-  if (arrayName.length && Array.isArray(arrayName)) {
-    collectionAction.forEach(callback);
+const fillListData = (
+  arrayName,
+  collectionAction,
+  element,
+  className,
+  callback
+) => {
+  if (Array.isArray(arrayName)) {
+    if (arrayName.length) {
+      collectionAction.forEach(callback);
+    }
+
   } else {
-    element.querySelector(`.popup__${className}`).style.display = 'none';
+    element.querySelector(`.popup__${className}`)
+      .style
+      .display = 'none';
   }
 };
 

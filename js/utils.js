@@ -1,5 +1,3 @@
-const SIMILAR_AD_COUNT = 10;
-
 const typeTranslateRus = {
   bungalow: 'Бунгало',
   flat: 'Квартира',
@@ -10,4 +8,7 @@ const typeTranslateRus = {
 
 const isResetButton = (evt) => evt.target.matches('.ad-form__reset');
 
-export { SIMILAR_AD_COUNT, typeTranslateRus, isResetButton };
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const isClick = (evt) => evt.type === 'click';
+
+export { typeTranslateRus, isResetButton, isEscapeKey, isClick };

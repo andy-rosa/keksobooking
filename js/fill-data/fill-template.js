@@ -1,11 +1,9 @@
-import { typeTranslateRus } from '../util.js';
+import { typeTranslateRus } from '../utils.js';
 import { getPopupValueTextContent, getPopupValueDoubleKey, getPhotoSrc, fillListData } from './fill-functions.js';
 
 const TEXT_FOR_ONLY_ROOM = 1;
 const TEXT_FOR_MORE_FIVE_ROOM = 5;
 const TEXT_FOR_ONLY_GUEST = 1;
-
-// const mapAdList = document.querySelector('#map-canvas');
 
 const template = document.querySelector('#card').content;
 const cardTemplate = template.querySelector('.popup');
@@ -39,6 +37,7 @@ const fillTemplate = ({ author, offer }) => {
       feature.remove();
     }
   };
+
   const getListPhoto = (photo, index, array) => {
     const image = adElement.querySelector('.popup__photo').cloneNode(true);
     image.src = photo;

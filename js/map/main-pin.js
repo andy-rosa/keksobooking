@@ -1,8 +1,8 @@
 const form = document.querySelector('.ad-form');
 const addressInput = form.querySelector('#address');
 
-const MAIN_WIDTH_MARKER = 44;
-const MAIN_HEIGHT_MARKER = 44;
+const MAIN_WIDTH_MARKER = 52;
+const MAIN_HEIGHT_MARKER = 52;
 
 const LOCATION_FLOAT_POINT = 5;
 
@@ -40,4 +40,4 @@ const mainPinMarker = L.marker(
 setStartPosition(tokioCoordinates);
 mainPinMarker.on('moveend', getLocationAddress);
 
-export { mainPinMarker, tokioCoordinates };
+export { mainPinMarker, tokioCoordinates, setStartPosition };

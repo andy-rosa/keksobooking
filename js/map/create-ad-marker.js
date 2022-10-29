@@ -1,12 +1,7 @@
 import { fillTemplate } from '../fill-data/fill-template.js';
-import { SIMILAR_AD_COUNT } from '../util.js';
-import { similarAds } from '../data.js';
 
-const similarAdsList = similarAds(SIMILAR_AD_COUNT);
-
-const AD_WIDTH_MARKER = 36;
-const AD_HEIGHT_MARKER = 36;
-
+const AD_WIDTH_MARKER = 40;
+const AD_HEIGHT_MARKER = 40;
 
 const icon = L.icon({
   iconUrl: '../img/pin.svg',
@@ -24,9 +19,10 @@ const createMarker = (ad, layer) => {
     {
       icon: icon,
     });
+
   marker
     .addTo(layer)
     .bindPopup(fillTemplate(ad));
 };
 
-export { similarAdsList, createMarker };
+export { createMarker };

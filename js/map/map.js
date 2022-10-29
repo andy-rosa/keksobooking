@@ -1,11 +1,12 @@
 import { activateForm } from '../toggle-state-page.js';
 import { mainPinMarker, tokioCoordinates } from './main-pin.js';
-import { similarAdsList, createMarker } from './create-ad-marker.js';
-
-
-const resetButton = document.querySelector('.ad-form__reset');
+import { createMarker } from './create-ad-marker.js';
+import { getDataServer } from '../api/api.js';
+import { resetForm } from '../utils/reset-form.js';
 
 const NORMAL_ZOOM = 10;
+
+const resetButton = document.querySelector('.ad-form__reset');
 
 
 const map = L.map('map-canvas')
@@ -26,11 +27,11 @@ mainPinMarker.addTo(map);
 
 const markerGroup = L.layerGroup().addTo(map);
 
-similarAdsList.forEach((ad) => {
-  createMarker(ad, markerGroup);
+getDataServer(createMarker, markerGroup);
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  map.setView(tokioCoordinates, NORMAL_ZOOM);
+  resetForm();
 });
 
-resetButton.addEventListener('click', () => {
-  mainPinMarker.setLatLng(tokioCoordinates);
-  map.setView(tokioCoordinates, NORMAL_ZOOM);
-});
