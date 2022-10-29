@@ -1,12 +1,5 @@
+import { typeMinPrice } from '../utils.js';
 import { form } from './form.js';
-
-const typeMinPrice = {
-  bungalow: 0,
-  flat: 1000,
-  hotel: 3000,
-  house: 5000,
-  palace: 10000,
-};
 
 const typeSelect = form.querySelector('#type');
 const priceInput = form.querySelector('#price');
@@ -20,4 +13,4 @@ const getTypePrice = (evt) => {
 
 const onTypeChange = (evt) => getTypePrice(evt);
 
-export { onTypeChange, typeMinPrice, priceInput, typeSelect };
+export { onTypeChange, priceInput, typeSelect };

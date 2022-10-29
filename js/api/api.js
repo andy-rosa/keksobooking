@@ -2,8 +2,13 @@ import { showErrorMapMessage } from '../error/map-error.js';
 import { showErrorFormMessage } from '../error/form-post-error.js';
 import { resetForm } from '../utils/reset-form.js';
 
+const Url = {
+  GET: 'https://27.javascript.pages.academy/keksobooking/data',
+  POST: 'https://27.javascript.pages.academy/keksobooking'
+};
+
 const getAdsDataServer = (onSuccess, layer) => {
-  fetch('https://27.javascript.pages.academy/keksobooking/data')
+  fetch(Url.GET)
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -18,7 +23,7 @@ const getAdsDataServer = (onSuccess, layer) => {
 
 const sendFormData = (onSuccess, body) => {
   fetch(
-    'https://27.javascript.pages.academy/keksobooking',
+    Url.POST,
     {
       method: 'POST',
       body
