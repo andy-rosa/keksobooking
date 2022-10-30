@@ -1,8 +1,8 @@
 const form = document.querySelector('.ad-form');
 const addressInput = form.querySelector('#address');
 
-const MAIN_WIDTH_MARKER = 44;
-const MAIN_HEIGHT_MARKER = 44;
+const MAIN_WIDTH_MARKER = 52;
+const MAIN_HEIGHT_MARKER = 52;
 
 const LOCATION_FLOAT_POINT = 5;
 
@@ -11,22 +11,15 @@ const tokioCoordinates = {
   lng: 139.83947,
 };
 
-const setStartPosition = (startData) => {
-  const NAME = 0;
-  const VALUE = 1;
-
-  addressInput.value = Object.entries(startData)
-    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
+const setStartPosition = (startPosition) => {
+  addressInput.value = Object.values(startPosition)
+    .map((locationСoordinate) => `${Number(locationСoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
     .join(', ');
 };
 
-
 const getLocationAddress = (evt) => {
-  const NAME = 0;
-  const VALUE = 1;
-
-  addressInput.value = Object.entries(evt.target.getLatLng())
-    .map((locationItem) => `${locationItem[NAME]}:${Number(locationItem[VALUE]).toFixed(LOCATION_FLOAT_POINT)}`)
+  addressInput.value = Object.values(evt.target.getLatLng())
+    .map((locationСoordinate) => `${Number(locationСoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
     .join(', ');
 };
 
@@ -47,4 +40,4 @@ const mainPinMarker = L.marker(
 setStartPosition(tokioCoordinates);
 mainPinMarker.on('moveend', getLocationAddress);
 
-export { mainPinMarker, tokioCoordinates };
+export { mainPinMarker, tokioCoordinates, setStartPosition };
