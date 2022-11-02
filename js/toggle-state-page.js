@@ -5,24 +5,30 @@ const filterElements = Array.from(filterForm.children);
 
 const deactivateForm = () => {
   adForm.classList.add('ad-form--disabled');
-  filterForm.classList.add('map__filters--disabled');
-
-  filterElements.forEach((childElement) => {
-    childElement.disabled = true;
-  });
 
   fieldsetAdList.forEach((fieldset) => {
     fieldset.disabled = true;
   });
 };
 
-const activateForm = () => {
-  adForm.classList.remove('ad-form--disabled');
+const deactivateFilter = () => {
+  filterForm.classList.add('map__filters--disabled');
+
+  filterElements.forEach((childElement) => {
+    childElement.disabled = true;
+  });
+};
+
+const activateFilter = () => {
   filterForm.classList.remove('map__filters--disabled');
 
   filterElements.forEach((childElement) => {
     childElement.disabled = false;
   });
+};
+
+const activateForm = () => {
+  adForm.classList.remove('ad-form--disabled');
 
   fieldsetAdList.forEach((fieldset) => {
     fieldset.disabled = false;
@@ -31,5 +37,6 @@ const activateForm = () => {
 
 // Деактивирует страницу при загрузке модулей, ожидая ответ от карты
 deactivateForm();
+deactivateFilter();
 
-export { activateForm, deactivateForm };
+export { activateForm, deactivateForm, activateFilter, deactivateFilter };

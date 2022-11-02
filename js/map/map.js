@@ -1,33 +1,24 @@
-import { activateForm } from '../toggle-state-page.js';
 import { mainPinMarker, tokioCoordinates } from './main-pin.js';
 import { createMarker } from './create-ad-marker.js';
 import { getDataServer } from '../api/api.js';
 import { resetForm } from '../utils/reset-form.js';
+import { map, NORMAL_ZOOM } from './init-map.js';
+import { filterAds, MAX_QUANTITY_ADS } from './filter-map.js';
+import { debounce } from '../utils.js';
 
-const NORMAL_ZOOM = 10;
 
+const formFilter = document.querySelector('.map__filters');
 const resetButton = document.querySelector('.ad-form__reset');
-
-
-const map = L.map('map-canvas')
-  .on('load', () => {
-    activateForm();
-  })
-  .setView(tokioCoordinates, NORMAL_ZOOM);
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
-
 
 mainPinMarker.addTo(map);
 
-const markerGroup = L.layerGroup().addTo(map);
+const optimizationFilter = debounce(filterAds);
 
-getDataServer(createMarker, markerGroup);
+getDataServer((ads) => {
+  createMarker(ads.slice(0, MAX_QUANTITY_ADS));
+  formFilter.addEventListener('change', () => optimizationFilter(ads));
+});
+
 
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
