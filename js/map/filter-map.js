@@ -1,4 +1,5 @@
-import { createMarker } from './create-ad-marker.js';
+import { createMarker, markerGroup } from './create-ad-marker.js';
+
 
 const typeFilter = document.querySelector('#housing-type');
 const priceFilter = document.querySelector('#housing-price');
@@ -70,6 +71,7 @@ const filterFeatures = (ad) => {
 
 
 const filterAds = (ads) => {
+  markerGroup.clearLayers();
   createMarker(ads
     .filter(filterType)
     .filter(filterPrice)
