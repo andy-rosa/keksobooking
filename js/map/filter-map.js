@@ -1,6 +1,12 @@
 import { createMarker, markerGroup } from './create-ad-marker.js';
 
 
+const MAX_QUANTITY_ADS = 10;
+const LOW_PRICE = 10000;
+const HIGH_PRICE = 50000;
+
+const DEFAULT_NO_FILTER = 'any';
+
 const typeFilter = document.querySelector('#housing-type');
 const priceFilter = document.querySelector('#housing-price');
 const roomFilter = document.querySelector('#housing-rooms');
@@ -8,11 +14,10 @@ const guestsFilter = document.querySelector('#housing-guests');
 const fieldsetFeatures = document.querySelector('#housing-features');
 const checksInput = fieldsetFeatures.querySelectorAll('input');
 
-const MAX_QUANTITY_ADS = 10;
 
 const filterType = (ad) => {
   const { type } = ad.offer;
-  if (typeFilter.value === 'any') {
+  if (typeFilter.value === DEFAULT_NO_FILTER) {
     return true;
   }
   return type.includes(typeFilter.value);
@@ -20,20 +25,20 @@ const filterType = (ad) => {
 
 const filterPrice = (ad) => {
   const { price } = ad.offer;
-  if (priceFilter.value === 'any') {
+  if (priceFilter.value === DEFAULT_NO_FILTER) {
     return true;
   } else if (priceFilter.value === 'low') {
-    return price < 10000;
+    return price < LOW_PRICE;
   } else if (priceFilter.value === 'middle') {
-    return price >= 10000 && price < 50000;
+    return price >= LOW_PRICE && price < HIGH_PRICE;
   } else if (priceFilter.value === 'high') {
-    return price >= 50000;
+    return price >= HIGH_PRICE;
   }
 };
 
 const filterRooms = (ad) => {
   const { rooms } = ad.offer;
-  if (roomFilter.value === 'any') {
+  if (roomFilter.value === DEFAULT_NO_FILTER) {
     return true;
   }
   return rooms === Number(roomFilter.value);
@@ -41,7 +46,7 @@ const filterRooms = (ad) => {
 
 const filterGuests = (ad) => {
   const { guests } = ad.offer;
-  if (guestsFilter.value === 'any') {
+  if (guestsFilter.value === DEFAULT_NO_FILTER) {
     return true;
   }
   return guests === Number(guestsFilter.value);
