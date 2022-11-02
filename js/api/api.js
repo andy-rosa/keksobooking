@@ -7,12 +7,12 @@ const Url = {
   POST: 'https://27.javascript.pages.academy/keksobooking'
 };
 
-const getAdsDataServer = (onSuccess, layer) => {
+const getAdsDataServer = (onSuccess) => {
   fetch(Url.GET)
     .then((response) => {
       if (response.ok) {
         return response.json()
-          .then((ads) => ads.forEach((ad) => onSuccess(ad, layer)));
+          .then((ads) => onSuccess(ads));
 
       } else {
         showErrorMapMessage();
