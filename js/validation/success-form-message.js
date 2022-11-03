@@ -11,15 +11,18 @@ const showSuccessMessage = () => {
       evt.preventDefault();
       successMessage.remove();
       document.removeEventListener('keydown', onSuccessKeydown);
-    }
-  };
-
-  const onSuccessClick = (evt) => {
-    if (isClick(evt)) {
-      successMessage.remove();
       document.removeEventListener('click', onSuccessClick);
     }
   };
+
+  // Функция-обработчик объявлена декларативно, так как удаляется выше.
+  function onSuccessClick (evt) {
+    if (isClick(evt)) {
+      successMessage.remove();
+      document.removeEventListener('click', onSuccessClick);
+      document.removeEventListener('keydown', onSuccessKeydown);
+    }
+  }
 
 
   document.addEventListener('keydown', onSuccessKeydown);
