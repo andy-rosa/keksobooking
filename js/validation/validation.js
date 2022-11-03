@@ -5,6 +5,7 @@ import { onTypeChange, priceInput, typeSelect } from './price-ad.js';
 import { onTimeChange, fieldsetTime } from './check-time.js';
 import { sendFormData } from '../api/api.js';
 import { showSuccessMessage } from './success-form-message.js';
+import { blockSubmitButton, unblockSubmitButton } from '../submit-button.js';
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -20,9 +21,12 @@ form.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   if (isValid) {
-    sendFormData(
-      showSuccessMessage,
-      new FormData(evt.target)
+    blockSubmitButton();
+    sendFormData(() => {
+      showSuccessMessage();
+      unblockSubmitButton();
+    },
+    new FormData(evt.target)
     );
   }
 });
