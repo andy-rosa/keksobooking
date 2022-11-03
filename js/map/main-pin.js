@@ -6,7 +6,7 @@ const MAIN_HEIGHT_MARKER = 52;
 
 const LOCATION_FLOAT_POINT = 5;
 
-const tokioCoordinates = {
+const START_COORDINATES = {
   lat: 35.65283,
   lng: 139.83947,
 };
@@ -30,14 +30,14 @@ const mainPinIcon = L.icon({
 });
 
 const mainPinMarker = L.marker(
-  tokioCoordinates,
+  START_COORDINATES,
   {
     draggable: true,
     icon: mainPinIcon,
   }
 );
 
-setStartPosition(tokioCoordinates);
+setStartPosition(START_COORDINATES);
 mainPinMarker.on('moveend', getLocationAddress);
 
-export { mainPinMarker, tokioCoordinates, setStartPosition };
+export { mainPinMarker, START_COORDINATES, setStartPosition };

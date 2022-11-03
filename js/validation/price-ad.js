@@ -11,7 +11,7 @@ const getTypePrice = (evt) => {
   priceInput.setAttribute('placeholder', minPrice);
 };
 
-const validatePrice = () => priceInput.getAttribute('min') < priceInput.value;
+const validatePrice = () => priceInput.getAttribute('min') <= priceInput.value;
 
 const onTypeChange = (evt) => getTypePrice(evt);
 

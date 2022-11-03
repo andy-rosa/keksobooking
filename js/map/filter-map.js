@@ -12,7 +12,7 @@ const priceFilter = document.querySelector('#housing-price');
 const roomFilter = document.querySelector('#housing-rooms');
 const guestsFilter = document.querySelector('#housing-guests');
 const fieldsetFeatures = document.querySelector('#housing-features');
-const checksInput = fieldsetFeatures.querySelectorAll('input');
+const checksInputs = fieldsetFeatures.querySelectorAll('input');
 
 
 const filterType = (ad) => {
@@ -54,7 +54,7 @@ const filterGuests = (ad) => {
 
 const getListFeatures = () => {
   const features = [];
-  for (const check of checksInput) {
+  for (const check of checksInputs) {
     if (check.checked) {
       features.push(check.value);
     }

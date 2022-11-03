@@ -12,11 +12,12 @@ const fillTemplate = ({ author, offer }) => {
   const adElement = cardTemplate.cloneNode(true);
   const listFeatures = adElement.querySelectorAll('.popup__feature');
 
-  const offerRoomText = offer.rooms === TEXT_FOR_ONLY_ROOM ?
+  const offerRoomText = (offer.rooms === TEXT_FOR_ONLY_ROOM) ?
     `${offer.rooms} комната` :
     `${offer.rooms >= TEXT_FOR_MORE_FIVE_ROOM ?
       `${offer.rooms} комнат` :
       `${offer.rooms} комнаты`}`;
+
   const offerGuestsText = `для ${offer.guests === TEXT_FOR_ONLY_GUEST ?
     `${offer.guests} гостя` :
     `${offer.guests} гостей`}`;

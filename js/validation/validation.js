@@ -34,7 +34,7 @@ form.addEventListener('submit', (evt) => {
 
 form.addEventListener('click', (evt) => {
   if (isResetButton(evt)) {
-    priceInput.setAttribute('placeholder', typeMinPrice['flat']);
+    priceInput.setAttribute('placeholder', typeMinPrice['bungalow']);
   }
 });
 

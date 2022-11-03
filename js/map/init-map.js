@@ -1,5 +1,5 @@
 import { activateForm } from '../toggle-state-page.js';
-import { tokioCoordinates } from './main-pin.js';
+import { START_COORDINATES } from './main-pin.js';
 
 const NORMAL_ZOOM = 10;
 
@@ -9,7 +9,7 @@ const initMap = (location, zoom) => L.map('map-canvas')
   })
   .setView(location, zoom);
 
-const map = initMap (tokioCoordinates, NORMAL_ZOOM);
+const map = initMap(START_COORDINATES, NORMAL_ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
