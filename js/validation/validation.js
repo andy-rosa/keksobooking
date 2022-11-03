@@ -1,7 +1,7 @@
 import { form } from './form.js';
 import { isResetButton, typeMinPrice } from '../utils.js';
 import { validateRoom, roomSelect } from './guest-rooms.js';
-import { onTypeChange, priceInput, typeSelect } from './price-ad.js';
+import { onTypeChange, priceInput, typeSelect, validatePrice } from './price-ad.js';
 import { onTimeChange, fieldsetTime } from './check-time.js';
 import { sendFormData } from '../api/api.js';
 import { showSuccessMessage } from './success-form-message.js';
@@ -15,6 +15,7 @@ const pristine = new Pristine(form, {
 });
 
 pristine.addValidator(roomSelect, validateRoom, 'Не подходящее значение');
+pristine.addValidator(priceInput, validatePrice, 'Цена меньше минимальной');
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

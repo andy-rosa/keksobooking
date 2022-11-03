@@ -2,7 +2,7 @@ const sliderElement = document.querySelector('.ad-form__slider');
 const priceInput = document.querySelector('#price');
 const typeInput = document.querySelector('#type');
 
-const MIN_PRICE = 1000;
+const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
 const PRICE_CHANGE = 1;
 
@@ -18,10 +18,6 @@ const typesMinPrice = {
 
 const getPrice = (value) => typesMinPrice[value];
 
-document.addEventListener('DOMContentLoaded', () => {
-  sliderElement.noUiSlider.set(priceInput.getAttribute('min'));
-}, { 'once': true });
-
 noUiSlider.create(sliderElement, {
   range: {
     min: MIN_PRICE,
@@ -31,13 +27,9 @@ noUiSlider.create(sliderElement, {
   step: PRICE_CHANGE,
   connect: 'lower',
   format: {
-    to: function (value) {
-      return value.toFixed(NUMBER_INTEGER);
-    },
-    from: function (value) {
-      return parseFloat(value);
-    },
-  },
+    to: (value) => value.toFixed(NUMBER_INTEGER),
+    from: (value) => parseFloat(value)
+  }
 });
 
 sliderElement.noUiSlider.on('update', () => {
@@ -50,7 +42,8 @@ typeInput.addEventListener('change', (evt) => {
       min: getPrice(evt.target.value),
       max: MAX_PRICE,
     },
+    start: priceInput.value,
     step: PRICE_CHANGE,
   });
-  sliderElement.noUiSlider.set(priceInput.getAttribute('min'));
+  sliderElement.noUiSlider.set(priceInput.value);
 });
