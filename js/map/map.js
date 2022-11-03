@@ -1,4 +1,4 @@
-import { mainPinMarker, tokioCoordinates } from './main-pin.js';
+import { mainPinMarker, START_COORDINATES } from './main-pin.js';
 import { createMarker } from './create-ad-marker.js';
 import { getDataServer } from '../api/api.js';
 import { resetForm } from '../utils/reset-form.js';
@@ -22,7 +22,7 @@ getDataServer((ads) => {
 
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
-  map.setView(tokioCoordinates, NORMAL_ZOOM);
+  map.setView(START_COORDINATES, NORMAL_ZOOM);
   resetForm();
 });
 
