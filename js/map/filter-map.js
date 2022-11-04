@@ -1,6 +1,5 @@
 import { createMarker, markerGroup } from './create-ad-marker.js';
 
-
 const MAX_QUANTITY_ADS = 10;
 const LOW_PRICE = 10000;
 const HIGH_PRICE = 50000;
@@ -61,7 +60,6 @@ const getListFeatures = () => {
   }
   return features;
 };
-
 
 const filterFeatures = (ad) => {
   const { features } = ad.offer;
