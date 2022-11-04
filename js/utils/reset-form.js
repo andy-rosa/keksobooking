@@ -1,3 +1,4 @@
+import { map } from '../map/init-map.js';
 import { setStartPosition, START_COORDINATES, mainPinMarker } from '../map/main-pin.js';
 import { typeMinPrice } from '../utils.js';
 
@@ -8,6 +9,7 @@ const priceInput = form.querySelector('#price');
 const resetForm = () => {
   filter.reset();
   form.reset();
+  map.closePopup();
   priceInput.setAttribute('placeholder', typeMinPrice['bungalow'] );
   setStartPosition(START_COORDINATES);
   mainPinMarker.setLatLng(START_COORDINATES);
