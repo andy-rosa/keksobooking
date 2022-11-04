@@ -1,3 +1,17 @@
+const TEXT_FOR_ONLY_ROOM = 1;
+const TEXT_FOR_MORE_FIVE_ROOM = 5;
+
+const getCorrectRoomEnding = (roomQuantity) => {
+  switch (true) {
+    case roomQuantity === TEXT_FOR_ONLY_ROOM:
+      return `${roomQuantity} комната`;
+    case roomQuantity >= TEXT_FOR_MORE_FIVE_ROOM:
+      return `${roomQuantity} комнат`;
+    default:
+      return `${roomQuantity} комнаты`;
+  }
+};
+
 const getPopupValueTextContent = (
   className,
   classValue,
@@ -59,11 +73,11 @@ const fillListData = (
   collectionAction,
   element,
   className,
-  callback
+  cb
 ) => {
   if (Array.isArray(arrayName)) {
     if (arrayName.length) {
-      collectionAction.forEach(callback);
+      collectionAction.forEach(cb);
     }
 
   } else {
@@ -73,4 +87,5 @@ const fillListData = (
   }
 };
 
-export { getPopupValueTextContent, getPopupValueDoubleKey, getPhotoSrc, fillListData };
+
+export { getCorrectRoomEnding, getPopupValueTextContent, getPopupValueDoubleKey, getPhotoSrc, fillListData };
