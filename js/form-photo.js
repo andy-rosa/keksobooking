@@ -2,7 +2,7 @@ import { form } from './validation/form.js';
 
 const FILES_TYPES = ['jpg', 'jpeg', 'png'];
 
-const CHOOSEN_FILE = 0;
+const CHOSEN_FILE = 0;
 
 const IMAGE_WIDTH = '70px';
 const IMAGE_HEIGHT = '70px';
@@ -14,7 +14,7 @@ const housePhotoPreview = form.querySelector('.ad-form__photo');
 
 form.addEventListener('change', (evt) => {
   if (evt.target.matches('#avatar')) {
-    const file = avatarChooser.files[CHOOSEN_FILE];
+    const file = avatarChooser.files[CHOSEN_FILE];
     const fileName = file.name.toLowerCase();
 
     const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
@@ -24,7 +24,7 @@ form.addEventListener('change', (evt) => {
   }
 
   if (evt.target.matches('#images')) {
-    const file = housePhotoChooser.files[CHOOSEN_FILE];
+    const file = housePhotoChooser.files[CHOSEN_FILE];
     const fileName = file.name.toLowerCase();
 
     const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
