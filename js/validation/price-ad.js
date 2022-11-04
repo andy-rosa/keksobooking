@@ -11,8 +11,8 @@ const getTypePrice = (evt) => {
   priceInput.setAttribute('placeholder', minPrice);
 };
 
-const validatePrice = () => priceInput.getAttribute('min') <= priceInput.value;
+const validatePrice = () => Number(priceInput.getAttribute('min')) <= Number(priceInput.value);
 
 const onTypeChange = (evt) => getTypePrice(evt);
 
-export { onTypeChange, priceInput, typeSelect, validatePrice, };
+export { onTypeChange, priceInput, typeSelect, validatePrice };
