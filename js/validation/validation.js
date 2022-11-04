@@ -1,5 +1,4 @@
 import { form } from './form.js';
-import { isResetButton, typeMinPrice } from '../utils.js';
 import { validateRoom, roomSelect } from './guest-rooms.js';
 import { onTypeChange, priceInput, typeSelect, validatePrice } from './price-ad.js';
 import { onTimeChange, fieldsetTime } from './check-time.js';
@@ -29,12 +28,6 @@ form.addEventListener('submit', (evt) => {
     },
     new FormData(evt.target)
     );
-  }
-});
-
-form.addEventListener('click', (evt) => {
-  if (isResetButton(evt)) {
-    priceInput.setAttribute('placeholder', typeMinPrice['bungalow']);
   }
 });
 

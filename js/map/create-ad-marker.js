@@ -32,4 +32,4 @@ const createMarker = (ads) => {
 };
 
 
-export { createMarker,markerGroup };
+export { createMarker, markerGroup };

@@ -1,6 +1,5 @@
 import { createMarker, markerGroup } from './create-ad-marker.js';
 
-
 const MAX_QUANTITY_ADS = 10;
 const LOW_PRICE = 10000;
 const HIGH_PRICE = 50000;
@@ -25,14 +24,15 @@ const filterType = (ad) => {
 
 const filterPrice = (ad) => {
   const { price } = ad.offer;
-  if (priceFilter.value === DEFAULT_NO_FILTER) {
-    return true;
-  } else if (priceFilter.value === 'low') {
-    return price < LOW_PRICE;
-  } else if (priceFilter.value === 'middle') {
-    return price >= LOW_PRICE && price < HIGH_PRICE;
-  } else if (priceFilter.value === 'high') {
-    return price >= HIGH_PRICE;
+  switch (priceFilter.value) {
+    case DEFAULT_NO_FILTER:
+      return true;
+    case 'low':
+      return price < LOW_PRICE;
+    case 'middle':
+      return price >= LOW_PRICE && price < HIGH_PRICE;
+    case 'high':
+      return price >= HIGH_PRICE;
   }
 };
 
@@ -61,7 +61,6 @@ const getListFeatures = () => {
   }
   return features;
 };
-
 
 const filterFeatures = (ad) => {
   const { features } = ad.offer;

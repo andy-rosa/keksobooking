@@ -1,6 +1,3 @@
-const form = document.querySelector('.ad-form');
-const addressInput = form.querySelector('#address');
-
 const MAIN_WIDTH_MARKER = 52;
 const MAIN_HEIGHT_MARKER = 52;
 
@@ -11,15 +8,19 @@ const START_COORDINATES = {
   lng: 139.83947,
 };
 
+const form = document.querySelector('.ad-form');
+const addressInput = form.querySelector('#address');
+
+
 const setStartPosition = (startPosition) => {
   addressInput.value = Object.values(startPosition)
-    .map((locationСoordinate) => `${Number(locationСoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
+    .map((locationCoordinate) => `${Number(locationCoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
     .join(', ');
 };
 
 const getLocationAddress = (evt) => {
   addressInput.value = Object.values(evt.target.getLatLng())
-    .map((locationСoordinate) => `${Number(locationСoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
+    .map((locationCoordinate) => `${Number(locationCoordinate).toFixed(LOCATION_FLOAT_POINT)}`)
     .join(', ');
 };
 

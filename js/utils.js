@@ -22,7 +22,7 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 const isClick = (evt) => evt.type === 'click';
 
 
-function debounce(callback, timeoutDelay = STANDARD_DELAY) {
+const debounce = (callback, timeoutDelay = STANDARD_DELAY) => {
   let timeoutId;
 
   return (...rest) => {
@@ -30,6 +30,6 @@ function debounce(callback, timeoutDelay = STANDARD_DELAY) {
 
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 export { typeTranslateRus, typeMinPrice, isResetButton, isEscapeKey, isClick, debounce };

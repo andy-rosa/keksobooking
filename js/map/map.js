@@ -9,10 +9,9 @@ import { debounce } from '../utils.js';
 
 const formFilter = document.querySelector('.map__filters');
 const resetButton = document.querySelector('.ad-form__reset');
+const optimizationFilter = debounce(filterAds);
 
 mainPinMarker.addTo(map);
-
-const optimizationFilter = debounce(filterAds);
 
 getDataServer((ads) => {
   createMarker(ads.slice(0, MAX_QUANTITY_ADS));
