@@ -1,6 +1,6 @@
 import { form } from './validation/form.js';
 
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+const FILES_TYPES = ['jpg', 'jpeg', 'png'];
 
 const CHOOSEN_FILE = 0;
 
@@ -17,7 +17,7 @@ form.addEventListener('change', (evt) => {
     const file = avatarChooser.files[CHOOSEN_FILE];
     const fileName = file.name.toLowerCase();
 
-    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+    const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
     if (matches) {
       avatarPreview.src = URL.createObjectURL(file);
     }
@@ -27,7 +27,7 @@ form.addEventListener('change', (evt) => {
     const file = housePhotoChooser.files[CHOOSEN_FILE];
     const fileName = file.name.toLowerCase();
 
-    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+    const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
     if (matches) {
       housePhotoPreview.innerHTML = '';
 
