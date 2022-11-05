@@ -4,6 +4,8 @@ import { getCorrectRoomEnding, getPopupValueTextContent, getPopupValueDoubleKey,
 const TEXT_FOR_ONLY_GUEST = 1;
 const PRICE_NIGHT_TEXT = '₽/ночь';
 
+const PHOTO_TEMPLATE = 0;
+
 const template = document.querySelector('#card').content;
 const cardTemplate = template.querySelector('.popup');
 
@@ -39,7 +41,7 @@ const fillTemplate = ({ author, offer }) => {
     `, выезд до ${checkout}` :
     `Выезд до ${checkout}`}`;
 
-  const translationType = `${typeTranslateRus[type]}`;
+  const translationType = typeTranslateRus[type];
 
   const getListFeatures = (feature) => {
     const isFeature = features.some((adFeature) => feature.classList.contains(`popup__feature--${adFeature}`));
@@ -51,10 +53,13 @@ const fillTemplate = ({ author, offer }) => {
 
   const getListPhoto = (photo, index, array) => {
     const image = adElement.querySelector('.popup__photo').cloneNode(true);
+    const imageContainer = adElement.querySelector('.popup__photos');
     image.src = photo;
-    adElement.querySelector('.popup__photos').append(image);
+    imageContainer.append(image);
+
     if (index === array.length - 1) {
-      adElement.querySelector('.popup__photos').removeChild(adElement.querySelectorAll('.popup__photo')[0]);
+      imageContainer
+        .removeChild(adElement.querySelectorAll('.popup__photo')[PHOTO_TEMPLATE]);
     }
   };
 
