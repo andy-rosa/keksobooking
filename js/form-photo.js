@@ -12,32 +12,42 @@ const avatarPreview = form.querySelector('.ad-form-header__preview img');
 const housePhotoChooser = form.querySelector('.ad-form__upload input[type=file]');
 const housePhotoPreview = form.querySelector('.ad-form__photo');
 
+const addAvatar = () => {
+  const file = avatarChooser.files[CHOSEN_FILE];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    avatarPreview.src = URL.createObjectURL(file);
+  }
+};
+
+const addPhotoHouse = () => {
+  const file = housePhotoChooser.files[CHOSEN_FILE];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    housePhotoPreview.innerHTML = '';
+
+    const image = document.createElement('img');
+    image.style.width = IMAGE_WIDTH;
+    image.style.height = IMAGE_HEIGHT;
+    image.style.alt = 'Фотография жилья';
+    image.src = URL.createObjectURL(file);
+
+    housePhotoPreview.append(image);
+  }
+};
+
 form.addEventListener('change', (evt) => {
   if (evt.target.matches('#avatar')) {
-    const file = avatarChooser.files[CHOSEN_FILE];
-    const fileName = file.name.toLowerCase();
-
-    const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
-    if (matches) {
-      avatarPreview.src = URL.createObjectURL(file);
-    }
+    addAvatar();
   }
 
   if (evt.target.matches('#images')) {
-    const file = housePhotoChooser.files[CHOSEN_FILE];
-    const fileName = file.name.toLowerCase();
-
-    const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
-    if (matches) {
-      housePhotoPreview.innerHTML = '';
-
-      const image = document.createElement('img');
-      image.style.width = IMAGE_WIDTH;
-      image.style.height = IMAGE_HEIGHT;
-      image.style.alt = 'Фотография жилья';
-      image.src = URL.createObjectURL(file);
-
-      housePhotoPreview.append(image);
-    }
+    addPhotoHouse();
   }
 });
+
+export { avatarPreview, housePhotoPreview };

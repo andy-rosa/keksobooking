@@ -13,7 +13,6 @@ const icon = L.icon({
 const markerGroup = L.layerGroup().addTo(map);
 
 const createMarker = (ads) => {
-
   ads.slice().forEach((ad) => {
     const { lat, lng } = ad.location;
     const marker = L.marker(
