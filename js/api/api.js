@@ -1,28 +1,24 @@
 import { showErrorMapMessage } from '../error/map-error.js';
 import { showErrorFormMessage } from '../error/form-post-error.js';
-import { resetForm } from '../utils/reset-form.js';
-import { activateFilter, deactivateFilter } from '../toggle-state-page.js';
+import { activateFilter } from '../toggle-state-page.js';
 
 const Url = {
   GET: 'https://27.javascript.pages.academy/keksobooking/data',
   POST: 'https://27.javascript.pages.academy/keksobooking'
 };
 
-const getAdsDataServer = (onSuccess) => {
+const getDataServer = (onSuccess) => {
   fetch(Url.GET)
-    .then((response) => {
-      if (response.ok) {
-        activateFilter();
-        return response.json()
-          .then((ads) => onSuccess(ads));
-
-      } else {
-        showErrorMapMessage();
-        deactivateFilter();
-      }
-    })
+    .then(
+      async (response) => {
+        if (response.ok) {
+          activateFilter();
+          const ads = await response.json();
+          return onSuccess(ads);
+        }
+        throw new Error('Данные не загрузились с сервера!');
+      })
     .catch(() => {
-      deactivateFilter();
       showErrorMapMessage();
     });
 };
@@ -35,15 +31,14 @@ const sendFormData = (onSuccess, body) => {
       body
     }
   )
-    .then((response) => {
-      if (response.ok) {
-        onSuccess();
-        resetForm();
-      } else {
-        showErrorFormMessage();
-      }
-    })
+    .then(
+      async (response) => {
+        if (response.ok) {
+          return onSuccess();
+        }
+        throw new Error('Данные не отправились на сервер!');
+      })
     .catch(() => showErrorFormMessage());
 };
 
-export { getAdsDataServer as getDataServer, sendFormData };
+export { getDataServer, sendFormData };

@@ -19,12 +19,13 @@ const getPopupValueTextContent = (
   other = '',
   classValueText = classValue
 ) => {
+  const textContainer = element.querySelector(`.popup__${className}`);
   if (classValue) {
-    element.querySelector(`.popup__${className}`)
-      .textContent = `${classValueText} ${String(other)}`;
+    textContainer
+      .textContent = `${classValueText} ${other}`;
 
   } else {
-    element.querySelector(`.popup__${className}`)
+    textContainer
       .style
       .display = 'none';
   }
@@ -38,31 +39,34 @@ const getPopupValueDoubleKey = (
   firstTextValue,
   secondTextValue
 ) => {
+  const textContainer = element.querySelector(`.popup__${className}`);
   if (classValueFirst && classValueSecond) {
-    element.querySelector(`.popup__${className}`)
+    textContainer
       .textContent = `${firstTextValue} ${secondTextValue}`;
 
   } else if (classValueFirst && !classValueSecond) {
-    element.querySelector(`.popup__${className}`)
+    textContainer
       .textContent = `${firstTextValue}`;
 
   } else if (!classValueFirst && classValueSecond) {
-    element.querySelector(`.popup__${className}`)
+    textContainer
       .textContent = `${secondTextValue}`;
 
   } else {
-    element.querySelector(`.popup__${className}`)
+    textContainer
       .style
       .display = 'none';
   }
 };
 
 const getPhotoSrc = (classValue, element) => {
+  const avatar = element.querySelector('.popup__avatar');
   if (classValue) {
-    element.querySelector('.popup__avatar')
+    avatar
       .src = classValue;
+
   } else {
-    element.querySelector('.popup__avatar')
+    avatar
       .style
       .display = 'none';
   }

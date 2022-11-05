@@ -1,16 +1,20 @@
+import { checkContentBetweenArray, debounce } from '../utils.js';
 import { createMarker, markerGroup } from './create-ad-marker.js';
 
 const MAX_QUANTITY_ADS = 10;
 const LOW_PRICE = 10000;
 const HIGH_PRICE = 50000;
 
+const WITHOUT_FEATURES = 0;
+
 const DEFAULT_NO_FILTER = 'any';
 
-const typeFilter = document.querySelector('#housing-type');
-const priceFilter = document.querySelector('#housing-price');
-const roomFilter = document.querySelector('#housing-rooms');
-const guestsFilter = document.querySelector('#housing-guests');
-const fieldsetFeatures = document.querySelector('#housing-features');
+const formFilter = document.querySelector('.map__filters');
+const typeFilter = formFilter.querySelector('#housing-type');
+const priceFilter = formFilter.querySelector('#housing-price');
+const roomFilter = formFilter.querySelector('#housing-rooms');
+const guestsFilter = formFilter.querySelector('#housing-guests');
+const fieldsetFeatures = formFilter.querySelector('#housing-features');
 const checksInputs = fieldsetFeatures.querySelectorAll('input');
 
 
@@ -54,25 +58,25 @@ const filterGuests = (ad) => {
 
 const getListFeatures = () => {
   const features = [];
-  for (const check of checksInputs) {
+  checksInputs.forEach((check) => {
     if (check.checked) {
       features.push(check.value);
     }
-  }
+  });
+
   return features;
 };
 
 const filterFeatures = (ad) => {
   const { features } = ad.offer;
   const featuresValue = getListFeatures();
-  if (featuresValue.length === 0) {
+  if (featuresValue.length === WITHOUT_FEATURES) {
     return true;
   }
   if (Array.isArray(features)) {
-    return features.join().includes(featuresValue.join());
+    return checkContentBetweenArray(features, featuresValue);
   }
 };
-
 
 const filterAds = (ads) => {
   markerGroup.clearLayers();
@@ -86,4 +90,11 @@ const filterAds = (ads) => {
   );
 };
 
-export { filterAds, MAX_QUANTITY_ADS };
+const optimizationFilter = debounce(filterAds);
+
+const setMapFilterChange = (ads) => {
+  createMarker(ads.slice(0, MAX_QUANTITY_ADS));
+  formFilter.addEventListener('change', () => optimizationFilter(ads));
+};
+
+export { optimizationFilter, setMapFilterChange };

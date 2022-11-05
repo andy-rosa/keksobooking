@@ -1,11 +1,11 @@
 import { activateForm } from '../toggle-state-page.js';
-import { START_COORDINATES } from './main-pin.js';
+import { mainPinMarker, START_COORDINATES } from './main-pin.js';
 
 const NORMAL_ZOOM = 10;
 
 const initMap = (location, zoom) => L.map('map-canvas')
   .on('load', () => {
-    activateForm ();
+    activateForm();
   })
   .setView(location, zoom);
 
@@ -17,5 +17,8 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+
+mainPinMarker.addTo(map);
+
 
 export { map, NORMAL_ZOOM };

@@ -7,7 +7,7 @@ const priceInput = form.querySelector('#price');
 
 const getTypePrice = (evt) => {
   const minPrice = typeMinPrice[evt.target.value];
-  priceInput.setAttribute('min', `${minPrice}`);
+  priceInput.setAttribute('min', minPrice);
   priceInput.setAttribute('placeholder', minPrice);
 };
 

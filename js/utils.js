@@ -16,11 +16,20 @@ const typeMinPrice = {
 
 const STANDARD_DELAY = 500;
 
-const isResetButton = (evt) => evt.target.matches('.ad-form__reset');
+const NOT_CONTAIN = -1;
+
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isClick = (evt) => evt.type === 'click';
 
+const checkContentBetweenArray = (checkup, availability) => {
+  for (let i = 0; i < availability.length; i++) {
+    if(checkup.indexOf(availability[i]) === NOT_CONTAIN) {
+      return false;
+    }
+  }
+  return true;
+};
 
 const debounce = (callback, timeoutDelay = STANDARD_DELAY) => {
   let timeoutId;
@@ -32,4 +41,4 @@ const debounce = (callback, timeoutDelay = STANDARD_DELAY) => {
   };
 };
 
-export { typeTranslateRus, typeMinPrice, isResetButton, isEscapeKey, isClick, debounce };
+export { typeTranslateRus, typeMinPrice, isEscapeKey, isClick, checkContentBetweenArray, debounce };
