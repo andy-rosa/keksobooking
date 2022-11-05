@@ -39,4 +39,4 @@ const activateForm = () => {
 deactivateForm();
 deactivateFilter();
 
-export { activateForm, deactivateForm, activateFilter, deactivateFilter };
+export { activateForm, deactivateForm, activateFilter };
