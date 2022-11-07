@@ -25,7 +25,7 @@ const getLocationAddress = (evt) => {
 };
 
 const mainPinIcon = L.icon({
-  iconUrl: '../../img/main-pin.svg',
+  iconUrl: 'img/main-pin.svg',
   iconSize: [MAIN_WIDTH_MARKER, MAIN_HEIGHT_MARKER],
   iconAnchor: [MAIN_WIDTH_MARKER / 2, MAIN_HEIGHT_MARKER],
 });
