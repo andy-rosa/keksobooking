@@ -5,7 +5,7 @@ const AD_WIDTH_MARKER = 40;
 const AD_HEIGHT_MARKER = 40;
 
 const icon = L.icon({
-  iconUrl: '../img/pin.svg',
+  iconUrl: 'img/pin.svg',
   iconSize: [AD_WIDTH_MARKER, AD_HEIGHT_MARKER],
   iconAnchor: [AD_WIDTH_MARKER / 2, AD_HEIGHT_MARKER],
 });
