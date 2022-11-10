@@ -38,5 +38,17 @@ const setAdFormSubmit = (cb, callbackArgument) => {
 
 fieldsetTime.addEventListener('change', onTimeChange);
 typeSelect.addEventListener('change', onTypeChange);
+form.addEventListener('click', () => {
+  if (priceInput.value) {
+    pristine.validate(typeSelect);
+    pristine.validate(priceInput);
+  }
+});
+form.addEventListener('change', () => {
+  if (priceInput.value) {
+    pristine.validate(typeSelect);
+    pristine.validate(priceInput);
+  }
+});
 
 export { setAdFormSubmit };
