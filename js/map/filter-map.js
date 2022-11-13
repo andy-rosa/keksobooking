@@ -78,16 +78,29 @@ const filterFeatures = (ad) => {
   }
 };
 
+const getListAdsFiltered = (ads) => {
+  const filterGroup = [];
+  for (const ad of ads) {
+    if (filterGroup.length === MAX_QUANTITY_ADS) {
+      return filterGroup;
+    }
+    if (
+      filterType(ad) &&
+      filterPrice(ad) &&
+      filterRooms(ad) &&
+      filterGuests(ad) &&
+      filterFeatures(ad)
+    ) {
+      filterGroup.push(ad);
+    }
+  }
+  return filterGroup;
+};
+
 const filterAds = (ads) => {
   markerGroup.clearLayers();
-  createMarker(ads
-    .filter(filterType)
-    .filter(filterPrice)
-    .filter(filterRooms)
-    .filter(filterGuests)
-    .filter(filterFeatures)
-    .slice(0, MAX_QUANTITY_ADS)
-  );
+  const filteredAdsList = getListAdsFiltered(ads);
+  createMarker(filteredAdsList);
 };
 
 const optimizationFilter = debounce(filterAds);
