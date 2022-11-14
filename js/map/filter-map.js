@@ -106,7 +106,14 @@ const filterAds = (ads) => {
 const optimizationFilter = debounce(filterAds);
 
 const setMapFilterChange = (ads) => {
-  createMarker(ads.slice(0, MAX_QUANTITY_ADS));
+  const maxAds = [];
+  for (const ad of ads) {
+    if (maxAds.length === MAX_QUANTITY_ADS) {
+      break;
+    }
+    maxAds.push(ad);
+  }
+  createMarker(maxAds);
   formFilter.addEventListener('change', () => optimizationFilter(ads));
 };
 
