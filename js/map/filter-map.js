@@ -1,5 +1,5 @@
 import { checkContentBetweenArray, debounce } from '../utils.js';
-import { createMarker, markerGroup } from './create-ad-marker.js';
+import { createMarker, markerGroup } from './create-markers.js';
 
 const MAX_QUANTITY_ADS = 10;
 const LOW_PRICE = 10000;
