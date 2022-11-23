@@ -93,6 +93,7 @@ const filterAds = (ads) => {
 const optimizationFilter = debounce(filterAds);
 
 const setMapFilterChange = (ads) => {
+  markerGroup.clearLayers();
   createMarker(ads.slice(0, MAX_QUANTITY_ADS));
   formFilter.addEventListener('change', () => optimizationFilter(ads));
 };
