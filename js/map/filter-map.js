@@ -106,6 +106,7 @@ const filterAds = (ads) => {
 const optimizationFilter = debounce(filterAds);
 
 const setMapFilterChange = (ads) => {
+  markerGroup.clearLayers();
   const maxAds = [];
   for (const ad of ads) {
     if (maxAds.length === MAX_QUANTITY_ADS) {
